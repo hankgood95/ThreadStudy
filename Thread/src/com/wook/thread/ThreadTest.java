@@ -1,5 +1,9 @@
 package com.wook.thread;
 
+import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadTest {
 	
 	public static void main(String[] args) throws InterruptedException{
@@ -33,20 +37,31 @@ public class ThreadTest {
 		//However , if you use 'join' InterruptedException occurs,
 		//So you should throw or try catch that part.
 		
-		System.out.println("Main Thread Start");
+//		System.out.println("Main Thread Start");
+//		
+//		Thread arr[] = new Thread[3];
+//		for(int i = 0; i<3;i++) {
+//			Thread thread = new Thread(new ThreadSecond("Thread"+i));
+//			arr[i] = thread;
+//			arr[i].start();
+//		}
+//		
+//		for(int i = 0; i<3;i++)
+//			arr[i].join();
+//		
+//		System.out.println("Main Thread End");
 		
-		Thread arr[] = new Thread[3];
-		for(int i = 0; i<3;i++) {
-			Thread thread = new Thread(new ThreadSecond("Thread"+i));
-			arr[i] = thread;
-			arr[i].start();
+		System.out.println("Main Thread Start");
+		System.out.println(Calendar.getInstance().getTime());
+		
+		//ExecutorService 인터페이스 구현객체 Executors 정적 메소드를 통해 최대 스레드 개수가 3인 스레드 풀을 만듬
+		ExecutorService exs = Executors.newFixedThreadPool(500); 
+		
+		for(int i = 0; i<1667;i++) {
+			exs.submit(new ThreadPool("tpn"+i,exs));
 		}
 		
-		for(int i = 0; i<3;i++)
-			arr[i].join();
-		
 		System.out.println("Main Thread End");
-		
 		
 	}
 
