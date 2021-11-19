@@ -1,6 +1,7 @@
 package com.wook.thread;
 
 import java.util.Calendar;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -55,13 +56,18 @@ public class ThreadTest {
 		System.out.println(Calendar.getInstance().getTime());
 		
 		//ExecutorService 인터페이스 구현객체 Executors 정적 메소드를 통해 최대 스레드 개수가 3인 스레드 풀을 만듬
+		CountDownLatch countDownLatch = new CountDownLatch(1667);
 		ExecutorService exs = Executors.newFixedThreadPool(500); 
 		
-		for(int i = 0; i<1667;i++) {
-			exs.submit(new ThreadPool("tpn"+i,exs));
-		}
+		CountDownLatch cdl = new CountDownLatch(3);
 		
+		for(int i = 0; i<1667;i++) {
+			exs.submit(new ThreadPool("tpn"+i,exs,countDownLatch));
+		}
+		exs.shutdown();
+		countDownLatch.await();
 		System.out.println("Main Thread End");
+		System.out.println(Calendar.getInstance().getTime());
 		
 	}
 
