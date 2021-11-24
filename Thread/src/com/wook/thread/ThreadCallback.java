@@ -1,7 +1,6 @@
 package com.wook.thread;
 
 import java.nio.channels.CompletionHandler;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
