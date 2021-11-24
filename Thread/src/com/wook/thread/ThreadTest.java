@@ -4,7 +4,10 @@ import java.nio.channels.CompletionHandler;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.CountDownLatch;
+<<<<<<< HEAD
 import java.util.concurrent.ExecutionException;
+=======
+>>>>>>> branch 'master' of https://github.com/hankgood95/ThreadStudy.git
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -87,9 +90,15 @@ public class ThreadTest {
 		System.out.println(Calendar.getInstance().getTime());
 		
 		//ExecutorService 인터페이스 구현객체 Executors 정적 메소드를 통해 최대 스레드 개수가 3인 스레드 풀을 만듬
+<<<<<<< HEAD
 		CountDownLatch countDownLatch = new CountDownLatch(1677);
 		ExecutorService exs = Executors.newFixedThreadPool(500);
+=======
+		CountDownLatch countDownLatch = new CountDownLatch(1667);
+		ExecutorService exs = Executors.newFixedThreadPool(500); 
+>>>>>>> branch 'master' of https://github.com/hankgood95/ThreadStudy.git
 		
+<<<<<<< HEAD
 		ArrayList<TestDto> tdl = new ArrayList<TestDto>();
 		
 		CompletionHandler<TestDto,Void> callBack = 
@@ -114,16 +123,28 @@ public class ThreadTest {
 		for(int i = 0;i<1677;i++) {
 			exs.submit(new ThreadCallback("Thread"+i,exs,countDownLatch,callBack));
 		}
+=======
+		CountDownLatch cdl = new CountDownLatch(3);
+>>>>>>> branch 'master' of https://github.com/hankgood95/ThreadStudy.git
 		
+<<<<<<< HEAD
+=======
+		for(int i = 0; i<1667;i++) {
+			exs.submit(new ThreadPool("tpn"+i,exs,countDownLatch));
+		}
+>>>>>>> branch 'master' of https://github.com/hankgood95/ThreadStudy.git
 		exs.shutdown();
 		countDownLatch.await();
 		System.out.println("Main Thread End");
+<<<<<<< HEAD
 		if(tdl.isEmpty()) {
 			System.out.println("시발 비어 있넹?");
 		}else {
 			System.out.println(tdl.size());
 		}
 		
+=======
+>>>>>>> branch 'master' of https://github.com/hankgood95/ThreadStudy.git
 		System.out.println(Calendar.getInstance().getTime());
 		
 	}
