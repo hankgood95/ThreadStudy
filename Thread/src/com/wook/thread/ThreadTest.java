@@ -119,7 +119,7 @@ public class ThreadTest {
 		countDownLatch.await();
 		System.out.println("Main Thread End");
 		if(tdl.isEmpty()) {
-			System.out.println("시발 비어 있네");
+			System.out.println("시발 비어 있넹?");
 		}else {
 			System.out.println(tdl.size());
 		}
