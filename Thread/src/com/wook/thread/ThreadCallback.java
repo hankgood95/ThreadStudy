@@ -30,9 +30,10 @@ public class ThreadCallback implements Runnable{
 		try {
 			Thread.sleep(6000);
 			callBack.completed(new TestDto(threadName,te.getPoolSize()), null);
-			cdl.countDown();
+			System.out.println("Finished Task : "+te.getCompletedTaskCount());
 			System.out.println();
 			System.out.println("API call success");
+			cdl.countDown();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

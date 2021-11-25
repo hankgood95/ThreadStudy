@@ -87,7 +87,7 @@ public class ThreadTest {
 		System.out.println(Calendar.getInstance().getTime());
 		
 		//ExecutorService 인터페이스 구현객체 Executors 정적 메소드를 통해 최대 스레드 개수가 3인 스레드 풀을 만듬
-		CountDownLatch countDownLatch = new CountDownLatch(1677);
+		CountDownLatch countDownLatch = new CountDownLatch(1680);
 		ExecutorService exs = Executors.newFixedThreadPool(500);
 		
 		ArrayList<TestDto> tdl = new ArrayList<TestDto>();
@@ -111,7 +111,7 @@ public class ThreadTest {
 			
 		};
 		
-		for(int i = 0;i<1677;i++) {
+		for(int i = 0;i<1680;i++) {
 			exs.submit(new ThreadCallback("Thread"+i,exs,countDownLatch,callBack));
 		}
 		
@@ -120,6 +120,9 @@ public class ThreadTest {
 		System.out.println("Main Thread End");
 		System.out.println(tdl.size());
 		
+		for(int i = 0;i<tdl.size();i++) {
+			System.out.println(tdl.get(i).toString());
+		}
 		System.out.println(Calendar.getInstance().getTime());
 		
 	}
