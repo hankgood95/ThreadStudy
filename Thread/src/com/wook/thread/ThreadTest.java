@@ -99,7 +99,7 @@ public class ThreadTest {
 					@Override
 					public void completed(TestDto result, Void attachment) {
 						// TODO Auto-generated method stub
-						tdl.add(result);
+						tdl.add(result); //전달받은 객체 인자를 list에 추가함
 					}
 					
 					//실패했을때
@@ -115,14 +115,15 @@ public class ThreadTest {
 			exs.submit(new ThreadCallback("Thread"+i,exs,countDownLatch,callBack));
 		}
 		
-		exs.shutdown();
-		countDownLatch.await();
+		exs.shutdown(); //thread pool로 다 호출하고 나면은 thread pool을 끝냄
+		countDownLatch.await(); //CountDownLatch가 다 끝날때까지 기다린다.
 		System.out.println("Main Thread End");
-		System.out.println(tdl.size());
+		System.out.println(tdl.size()); //질문 1. 왜 여기서 list size가 1680이지 않나요?
 		
 		for(int i = 0;i<tdl.size();i++) {
-			System.out.println(tdl.get(i).toString());
+			System.out.println(tdl.get(i).toString()); //질문 2. list에 추가되어있는 TestDto 객체가 왜 null 값인가요?
 		}
+		
 		System.out.println(Calendar.getInstance().getTime());
 		
 	}

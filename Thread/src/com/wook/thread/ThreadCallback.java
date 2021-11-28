@@ -10,7 +10,6 @@ public class ThreadCallback implements Runnable{
 	private String threadName;
 	private ThreadPoolExecutor te;
 	private CountDownLatch cdl;
-	private TestDto td;
 	private CompletionHandler<TestDto,Void> callBack;
 	
 	public ThreadCallback(String threadName, ExecutorService exs, CountDownLatch cdl,
@@ -29,7 +28,9 @@ public class ThreadCallback implements Runnable{
 		System.out.println("API call");
 		try {
 			Thread.sleep(6000);
-			callBack.completed(new TestDto(threadName,te.getPoolSize()), null);
+			TestDto td = new TestDto(threadName,te.getPoolSize()); //여기서 객체를 만드는데 객체가 null임
+			System.out.println(td.toString());
+			callBack.completed(td, null); //callback 메소드를 호출했을때 클래스 객체를 넘겨줌
 			System.out.println("Finished Task : "+te.getCompletedTaskCount());
 			System.out.println();
 			System.out.println("API call success");
