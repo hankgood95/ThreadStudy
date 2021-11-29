@@ -3,6 +3,7 @@ package com.wook.thread;
 import java.nio.channels.CompletionHandler;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -90,7 +91,7 @@ public class ThreadTest {
 		CountDownLatch countDownLatch = new CountDownLatch(1680);
 		ExecutorService exs = Executors.newFixedThreadPool(500);
 		
-		ArrayList<TestDto> tdl = new ArrayList<TestDto>();
+		List<TestDto> tdl = new ArrayList<TestDto>();
 		
 		CompletionHandler<TestDto,Void> callBack = 
 				new CompletionHandler<TestDto,Void>(){
@@ -99,6 +100,11 @@ public class ThreadTest {
 					@Override
 					public void completed(TestDto result, Void attachment) {
 						// TODO Auto-generated method stub
+						if(result == null) {
+							System.out.println("found it");
+							System.exit(0);
+						}
+						System.out.println("CallBack : "+result.toString());
 						tdl.add(result); //전달받은 객체 인자를 list에 추가함
 					}
 					
@@ -118,10 +124,10 @@ public class ThreadTest {
 		exs.shutdown(); //thread pool로 다 호출하고 나면은 thread pool을 끝냄
 		countDownLatch.await(); //CountDownLatch가 다 끝날때까지 기다린다.
 		System.out.println("Main Thread End");
-		System.out.println(tdl.size()); //질문 1. 왜 여기서 list size가 1680이지 않나요?
+		System.out.println(tdl.size());
 		
-		for(int i = 0;i<tdl.size();i++) {
-			System.out.println(tdl.get(i).toString()); //질문 2. list에 추가되어있는 TestDto 객체가 왜 null 값인가요?
+		for(TestDto td : tdl) {
+			System.out.println(td.toString()); //질문 2. list에 추가되어있는 TestDto 객체가 왜 null 값인가요?
 		}
 		
 		System.out.println(Calendar.getInstance().getTime());
